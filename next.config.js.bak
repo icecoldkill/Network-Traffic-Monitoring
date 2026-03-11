@@ -1,0 +1,83 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/**',
+      },
+    ],
+  },
+  
+  env: {
+    NEXT_PUBLIC_API_URL: '/api' // Use relative URLs for API calls
+  },
+  
+  // Remove experimental.serverActions as it's not needed with current Next.js version
+  
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:5005/:path*', // Proxy to Flask backend
+      },
+      // Add specific route rewrites for known endpoints
+      {
+        source: '/api/generate-data',
+        destination: 'http://localhost:5005/data/generate',
+      },
+      {
+        source: '/api/visualize',
+        destination: 'http://localhost:5005/visualize',
+      },
+      {
+        source: '/api/anomalies',
+        destination: 'http://localhost:5005/anomalies',
+      },
+      {
+        source: '/api/dashboard/metrics',
+        destination: 'http://localhost:5005/dashboard/metrics',
+      },
+      {
+        source: '/api/reports',
+        destination: 'http://localhost:5005/reports',
+      },
+      {
+        source: '/api/train',
+        destination: 'http://localhost:5005/train',
+      },
+    ]
+  },
+  
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Credentials', value: 'true' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET,OPTIONS,POST,PUT,DELETE' },
+          { key: 'Access-Control-Allow-Headers', value: 'X-Requested-With, Content-Type, Authorization' },
+        ],
+      },
+    ]
+  },
+  
+  // Add this to handle API routes in development
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: process.env.NODE_ENV === 'development' 
+          ? 'http://localhost:5005/:path*'
+          : '/api/:path*',
+      },
+    ]
+  },
+}
+
+module.exports = nextConfig

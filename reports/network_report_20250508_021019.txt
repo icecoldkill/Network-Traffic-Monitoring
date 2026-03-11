@@ -1,0 +1,43 @@
+Network Traffic Report
+Generated: 2025-05-08 02:10:19
+
+Time Period: 2023-01-01 00:00:00 to 2023-01-01 00:03:19
+Duration: 0:03:19
+
+Traffic Overview:
+- Total packets: 200
+- Total bytes: 125781
+- Average packet size: 628.90 bytes
+
+Protocol Distribution:
+- TCP: 146 packets (73.00%)
+- UDP: 40 packets (20.00%)
+- ICMP: 14 packets (7.00%)
+
+Most common protocol: TCP
+
+Source and Destination Information:
+- Unique source IPs: 137
+- Unique destination IPs: 146
+
+Top Source IPs:
+- 192.168.1.100: 9 packets
+- 192.168.1.58: 4 packets
+- 192.168.1.69: 4 packets
+- 192.168.1.218: 4 packets
+- 192.168.1.144: 4 packets
+
+Top Destination IPs:
+- 10.0.0.1: 9 packets
+
+- 10.0.0.217: 4 packets
+
+- 10.0.0.141: 4 packets
+
+- 10.0.0.105: 3 packets
+
+- 10.0.0.253: 3 packets
+
+No significant events detected during this period.
+
+End of Report

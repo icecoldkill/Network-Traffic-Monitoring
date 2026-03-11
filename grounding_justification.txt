@@ -1,0 +1,7 @@
+# grounding_justification.txt
+
+The Intelligent Network Security Agent specifically needs this retrieved data because:
+
+1. **In-Distribution Context:** General knowledge LLMs know *what* a DDoS attack is, but they do not know the specific schema of our `CIC-IDS2018` dataset or why our SOC prioritizes specific mitigation steps over others.
+2. **Current Tooling:** The RAG pipeline provides the agent with the exact syntax for our internal API tools (like `iptables` rules), ensuring high-fidelity tool-calling parameters.
+3. **Hallucination Mitigation:** By forcing the agent to cite sources from `knowledge_base/`, we ensure that incident reports are based on established security procedures rather than probabilistic text generation.
