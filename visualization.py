@@ -573,39 +573,3 @@ class NetworkTrafficVisualizer:
         except Exception as e:
             logger.error(f"Error creating visualization dataset: {str(e)}")
             return None, None
-            img1 = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
-            img1 = img1.reshape(fig.canvas.get_width_height()[::-1] + (3,))
-            img1 = cv2.resize(img1, image_size)
-            plt.close()
-            
-            # 2. Protocol distribution
-            protocol_counts = window_df['protocol'].value_counts()
-            fig, ax = plt.subplots(figsize=(4, 4))
-            ax.bar(protocol_counts.index, protocol_counts.values, color='green')
-            ax.set_xticks([])
-            ax.set_yticks([])
-            
-            fig.canvas.draw()
-            img2 = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
-            img2 = img2.reshape(fig.canvas.get_width_height()[::-1] + (3,))
-            img2 = cv2.resize(img2, image_size)
-            plt.close()
-            
-            # Combine the visualizations (side by side)
-            combined_img = np.concatenate((img1, img2), axis=1)
-            
-            images.append(combined_img)
-            
-            # Add label if available
-            if has_labels:
-                # If any packet in the window is an anomaly, label the window as anomaly
-                labels.append(1 if window_df['anomaly'].any() else 0)
-        
-        # Convert to numpy arrays
-        X = np.array(images)
-        
-        if has_labels:
-            y = np.array(labels)
-            return X, y
-        else:
-            return X, None

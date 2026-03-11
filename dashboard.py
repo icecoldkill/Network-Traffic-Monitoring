@@ -530,7 +530,7 @@ app.layout = html.Div([
     prevent_initial_call=True  # Make sure this is True
 )
 def control_live_capture(start_clicks, stop_clicks, interface, packet_count):
-    global live_capture_active, live_capture_thread, live_data
+    global live_capture_active, live_capture_thread
     
     ctx = dash.callback_context
     trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
