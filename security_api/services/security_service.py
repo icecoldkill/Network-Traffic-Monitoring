@@ -8,7 +8,7 @@ from security_components.siem.core import SIEMCore
 from security_components.ids.core import IntrusionDetectionSystem
 from security_components.ips.core import IntrusionPreventionSystem
 from security_components.ml.reinforcement_learning import ThreatResponseAgent
-from security_components.common.database import SessionLocal, SecurityEvent, Alert, RLAction
+from security_components.common.database import SessionLocal, SecurityEvent, Alert, RLAction, ThreatIntelligence
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

@@ -602,9 +602,9 @@ def generate_traffic_data(n_clicks, packet_count, anomaly_ratio):
         preview = html.Div([
             html.H4("Generated Traffic Data", style={'color': '#2196F3'}),
             html.P([
-                f"Created {len(df)} packets of simulated {environment} network traffic",
+                f"Created {len(df)} packets of simulated network traffic",
                 html.Br(),
-                f"Anomalies included: {include_anomalies == 'yes'}"
+                f"Anomaly ratio: {anomaly_ratio}"
             ]),
             dash.dash_table.DataTable(
                 data=df.head(10).to_dict('records'),
@@ -1631,8 +1631,6 @@ def chat():
 # Add a debug route to check the data store
 @app.server.route('/debug/store')
 def debug_store():
-    global last_visualization_data
-    
     # Return a simple HTML page showing the last data
     return f"""
     <html>

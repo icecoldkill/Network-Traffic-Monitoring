@@ -8,6 +8,8 @@ import threading
 import queue
 
 # Global state for live capture
+app = Flask(__name__)
+CORS(app)
 capture_queue = queue.Queue()
 capture_thread = None
 is_capturing = False
